@@ -1,0 +1,6 @@
+[allowlist]
+files = [".yamllint.yml", ".pre-commit-config.yaml", ".gitleaks.toml"]
+
+[[rules]]
+description = "Generic secret"
+regex = '''(?i)(password|secret|token|api[_-]?key|authorization|bearer)["'\s:=]+[A-Za-z0-9\-\._]{6,}'''

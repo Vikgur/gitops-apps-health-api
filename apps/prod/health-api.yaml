@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: health-api-prod
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: health-api
+    env: prod
+    team: devops
+spec:
+  project: health-api
+  source:
+    repoURL: https://gitlab.com/vikgur/helm-blue-green-canary-gitops-health-api.git
+    targetRevision: main
+    path: charts/health-api
+    helm:
+      valueFiles:
+        - helm/values/backend.yaml
+        - helm/values/frontend.yaml
+        - helm/values/nginx.yaml
+        - helm/values/postgres.yaml
+        - helm/values/jaeger.yaml
+        - helm/values/swagger.yaml
+  destination:
+    server: https://kubernetes.default.svc   # Argo CD в prod-кластере
+    namespace: health-api
+  syncPolicy:                                # prod вручную или через gate
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+  revisionHistoryLimit: 5

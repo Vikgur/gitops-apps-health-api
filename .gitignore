@@ -1,0 +1,28 @@
+# Ansible и временные файлы
+*.retry
+.vagrant/
+*.log
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+
+# Pre-commit и линтеры
+.cache/
+.pre-commit-config.yaml~
+
+# Kustomize build artifacts
+kustomization.yaml.backup
+
+# Vault и секреты
+.vault_pass.txt
+*.enc.yaml
+secrets/
+
+# Бинарные и временные
+*.tar.gz
+*.tgz
+*.zip
+.DS_Store
+Thumbs.db
