@@ -21,6 +21,13 @@ spec:
         - helm/values/postgres.yaml
         - helm/values/jaeger.yaml
         - helm/values/swagger.yaml
+        # overlays
+        - helm/values/blue/backend.yaml
+        - helm/values/canary/backend.yaml
+        - helm/values/blue/frontend.yaml
+        - helm/values/canary/frontend.yaml
+        - helm/values/blue/nginx.yaml
+        - helm/values/canary/nginx.yaml
   destination:
     server: https://kubernetes.default.svc   # Argo CD в prod-кластере
     namespace: health-api
